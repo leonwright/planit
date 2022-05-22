@@ -1,5 +1,10 @@
 {
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
-  "projects": {}
+  "projects": {
+    "feature-tables": "libs/feature-tables",
+    "planit-app": "apps/planit-app",
+    "planit-app-e2e": "apps/planit-app-e2e",
+    "shared": "libs/shared"
+  }
 }
