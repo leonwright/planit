@@ -1,0 +1,62 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/planit-server/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nxrocks/nx-spring-boot:build",
+      "options": {
+        "root": "apps/planit-server"
+      }
+    },
+    "test": {
+      "executor": "@nxrocks/nx-spring-boot:test",
+      "options": {
+        "root": "apps/planit-server"
+      }
+    },
+    "clean": {
+      "executor": "@nxrocks/nx-spring-boot:clean",
+      "options": {
+        "root": "apps/planit-server"
+      }
+    },
+    "format": {
+      "executor": "@nxrocks/nx-spring-boot:format",
+      "options": {
+        "root": "apps/planit-server"
+      }
+    },
+    "format-check": {
+      "executor": "@nxrocks/nx-spring-boot:format-check",
+      "options": {
+        "root": "apps/planit-server"
+      }
+    },
+    "run": {
+      "executor": "@nxrocks/nx-spring-boot:run",
+      "options": {
+        "root": "apps/planit-server"
+      }
+    },
+    "serve": {
+      "executor": "@nxrocks/nx-spring-boot:serve",
+      "options": {
+        "root": "apps/planit-server"
+      }
+    },
+    "buildImage": {
+      "executor": "@nxrocks/nx-spring-boot:buildImage",
+      "options": {
+        "root": "apps/planit-server"
+      }
+    },
+    "buildInfo": {
+      "executor": "@nxrocks/nx-spring-boot:buildInfo",
+      "options": {
+        "root": "apps/planit-server"
+      }
+    }
+  },
+  "tags": []
+}

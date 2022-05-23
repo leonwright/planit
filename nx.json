@@ -18,7 +18,12 @@
     "default": {
       "runner": "@nrwl/nx-cloud",
       "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "cacheableOperations": [
+          "build",
+          "lint",
+          "test",
+          "e2e"
+        ],
         "accessToken": "ZmMwOWM3NjYtY2RjNy00YWI0LWEzNjItZjQzNmMyZjgxNTZjfHJlYWQtd3JpdGU="
       }
     }
@@ -44,5 +49,8 @@
       }
     }
   },
-  "defaultProject": "planit-app"
+  "defaultProject": "planit-app",
+  "plugins": [
+    "@nxrocks/nx-spring-boot"
+  ]
 }

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Head from 'next/head';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -53,6 +54,9 @@ export default function TablesPage() {
 
   return (
     <Sidebar>
+      <Head>
+        <title>PlanIT - Tables</title>
+      </Head>
       <Page>
         <Header>
           <Typography variant="h5" gutterBottom component="div">

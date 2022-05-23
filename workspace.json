@@ -5,6 +5,7 @@
     "feature-tables": "libs/feature-tables",
     "planit-app": "apps/planit-app",
     "planit-app-e2e": "apps/planit-app-e2e",
+    "planit-server": "apps/planit-server",
     "shared": "libs/shared"
   }
 }

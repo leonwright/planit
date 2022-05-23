@@ -19,6 +19,9 @@ import ListItemText from '@mui/material/ListItemText';
 import { MenuItems } from './menu';
 import { ActiveLastBreadcrumb } from '../breadcrumbs/breadcrumbs';
 import Link from 'next/link';
+import { useUser } from '@auth0/nextjs-auth0';
+import { Avatar, Button, Menu, MenuItem } from '@mui/material';
+import ProfileMenu from '../profile-menu/profile-menu';
 
 interface SidebarProps {
   children: JSX.Element[] | JSX.Element | string;
@@ -98,6 +101,18 @@ const Drawer = styled(MuiDrawer, {
 export function Sidebar(props: SidebarProps) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
+  const { user, isLoading } = useUser();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const userMenuOpen = Boolean(anchorEl);
+
+  const handleProfileMenuClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleProfileMenuClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -107,11 +122,16 @@ export function Sidebar(props: SidebarProps) {
     setOpen(false);
   };
 
+  const AppToolbar = styled(Toolbar)`
+    display: flex;
+    justify-content: space-between;
+  `;
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <AppToolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -125,9 +145,19 @@ export function Sidebar(props: SidebarProps) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+            PlanIT
           </Typography>
-        </Toolbar>
+          {!isLoading && !user && (
+            <Link href="/api/auth/login">
+              <Button variant="contained" color="secondary">
+                Log In
+              </Button>
+            </Link>
+          )}
+          {user && (
+            <ProfileMenu imageSource={user.picture!} imageAlt={user.name!} />
+          )}
+        </AppToolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
