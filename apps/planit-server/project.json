@@ -4,59 +4,49 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nxrocks/nx-spring-boot:build",
+      "executor": "@nrwl/node:webpack",
+      "outputs": ["{options.outputPath}"],
       "options": {
-        "root": "apps/planit-server"
-      }
-    },
-    "test": {
-      "executor": "@nxrocks/nx-spring-boot:test",
-      "options": {
-        "root": "apps/planit-server"
-      }
-    },
-    "clean": {
-      "executor": "@nxrocks/nx-spring-boot:clean",
-      "options": {
-        "root": "apps/planit-server"
-      }
-    },
-    "format": {
-      "executor": "@nxrocks/nx-spring-boot:format",
-      "options": {
-        "root": "apps/planit-server"
-      }
-    },
-    "format-check": {
-      "executor": "@nxrocks/nx-spring-boot:format-check",
-      "options": {
-        "root": "apps/planit-server"
-      }
-    },
-    "run": {
-      "executor": "@nxrocks/nx-spring-boot:run",
-      "options": {
-        "root": "apps/planit-server"
+        "outputPath": "dist/apps/planit-server",
+        "main": "apps/planit-server/src/main.ts",
+        "tsConfig": "apps/planit-server/tsconfig.app.json",
+        "assets": ["apps/planit-server/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/planit-server/src/environments/environment.ts",
+              "with": "apps/planit-server/src/environments/environment.prod.ts"
+            }
+          ]
+        }
       }
     },
     "serve": {
-      "executor": "@nxrocks/nx-spring-boot:serve",
+      "executor": "@nrwl/node:node",
       "options": {
-        "root": "apps/planit-server"
+        "buildTarget": "planit-server:build"
       }
     },
-    "buildImage": {
-      "executor": "@nxrocks/nx-spring-boot:buildImage",
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
       "options": {
-        "root": "apps/planit-server"
+        "lintFilePatterns": ["apps/planit-server/**/*.ts"]
       }
     },
-    "buildInfo": {
-      "executor": "@nxrocks/nx-spring-boot:buildInfo",
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/planit-server"],
       "options": {
-        "root": "apps/planit-server"
+        "jestConfig": "apps/planit-server/jest.config.ts",
+        "passWithNoTests": true
       }
     }
   },
-  "tags": []
+  "tags": ["scope:planit", "type:app"]
 }

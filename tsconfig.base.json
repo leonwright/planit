@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@planit/feature-tables": ["libs/feature-tables/src/index.ts"],
+      "@planit/server/feature-restaurants": [
+        "libs/server/feature-restaurants/src/index.ts"
+      ],
       "@planit/shared": ["libs/shared/src/index.ts"]
     }
   },

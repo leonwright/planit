@@ -6,6 +6,7 @@
     "planit-app": "apps/planit-app",
     "planit-app-e2e": "apps/planit-app-e2e",
     "planit-server": "apps/planit-server",
+    "server-feature-restaurants": "libs/server/feature-restaurants",
     "shared": "libs/shared"
   }
 }
