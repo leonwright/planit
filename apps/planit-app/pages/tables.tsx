@@ -7,8 +7,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Sidebar } from '@planit/shared';
-import { Button, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import styled from 'styled-components';
+import { useState } from 'react';
+import { CreateTable } from '@planit/feature-tables';
 
 function createData(
   name: string,
@@ -38,7 +40,17 @@ const Header = styled.div`
   align-items: flex-end;
 `;
 
-export default function BasicTable() {
+export default function TablesPage() {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Sidebar>
       <Page>
@@ -46,7 +58,7 @@ export default function BasicTable() {
           <Typography variant="h5" gutterBottom component="div">
             Table Configuration
           </Typography>
-          <Button variant="outlined">Add Table</Button>
+          <CreateTable />
         </Header>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
