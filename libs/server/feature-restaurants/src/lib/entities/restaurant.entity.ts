@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Document } from 'mongoose';
 
-export class Restaurant {
+export class Restaurant extends Document {
   /**
    * The name of the Cat
    * @example Kitty
@@ -16,4 +17,10 @@ export class Restaurant {
     description: 'The address of the restaurant.',
   })
   address: string;
+
+  @ApiProperty({
+    example: 'Argentinian Restaurant in Manila',
+    description: 'The description of the restaurant.',
+  })
+  description: string;
 }

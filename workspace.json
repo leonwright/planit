@@ -8,6 +8,7 @@
     "planit-server": "apps/planit-server",
     "server-feature-authorization": "libs/server/feature-authorization",
     "server-feature-restaurants": "libs/server/feature-restaurants",
+    "server-shared": "libs/server/shared",
     "shared": "libs/shared"
   }
 }

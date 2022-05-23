@@ -19,6 +19,16 @@ async function bootstrap() {
     .setTitle('PlanIT API')
     .setDescription('The monolith PlanIT API')
     .setVersion('1.0')
+    // .addBearerAuth({
+    //   type: 'oauth2',
+    //   flows: {
+    //     authorizationCode: {
+    //       authorizationUrl: 'https://plan-it.us.auth0.com/authorize',
+    //       tokenUrl: 'https://plan-it.us.auth0.com/oauth/token',
+    //       scopes: ['openid'],
+    //     },
+    //   },
+    // })
     .addBearerAuth()
     .addServer('http://localhost:3333')
     .build();

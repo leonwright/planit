@@ -1,16 +1,26 @@
-import { Controller, Get, Param, SetMetadata, UseGuards } from '@nestjs/common';
-import { ServerFeatureRestaurantsService } from './server-feature-restaurants.service';
 import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  SetMetadata,
+  UseGuards,
+} from '@nestjs/common';
+import { ServerFeatureRestaurantsService } from './server-feature-restaurants.service';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Restaurant } from './entities/restaurant.entity';
 import {
   AuthorizationGuard,
   PermissionsGuard,
 } from '@planit/server/feature-authorization';
+import {
+  CreateRestaurantDTO,
+  GetRestaurantDTO,
+  UpdateRestaurantDTO,
+} from './dtos';
 
 @ApiBearerAuth()
 @ApiTags('restaurants')
@@ -28,7 +38,44 @@ export class ServerFeatureRestaurantsController {
   })
   @UseGuards(AuthorizationGuard, PermissionsGuard)
   @SetMetadata('permissions', ['read:restaurants'])
-  findOne(): Restaurant {
-    return this.serverFeatureRestaurantsService.hello();
+  findOne(): Promise<Restaurant[]> {
+    return this.serverFeatureRestaurantsService.findAll();
+  }
+
+  @Post()
+  @ApiResponse({
+    status: 201,
+    description: 'The Created Record',
+    type: Restaurant,
+  })
+  @UseGuards(AuthorizationGuard, PermissionsGuard)
+  @SetMetadata('permissions', ['create:restaurant'])
+  createRestaurant(@Body() dto: CreateRestaurantDTO): Promise<Restaurant> {
+    return this.serverFeatureRestaurantsService.create(dto);
+  }
+
+  @Delete(':restaurantId')
+  @ApiResponse({
+    status: 200,
+    description: 'The deleted Record',
+  })
+  @UseGuards(AuthorizationGuard, PermissionsGuard)
+  @SetMetadata('permissions', ['delete:restaurant'])
+  deleteRestaurant(@Param() params: GetRestaurantDTO) {
+    return this.serverFeatureRestaurantsService.deleteRestaurantById(params);
+  }
+
+  @Put()
+  @ApiResponse({
+    status: 200,
+    description: 'The updated Record',
+  })
+  @UseGuards(AuthorizationGuard, PermissionsGuard)
+  @SetMetadata('permissions', ['update:restaurant'])
+  updateRestaurant(@Body() body: UpdateRestaurantDTO) {
+    return this.serverFeatureRestaurantsService.updateRestaurantById(
+      body.restaurantId,
+      body
+    );
   }
 }
