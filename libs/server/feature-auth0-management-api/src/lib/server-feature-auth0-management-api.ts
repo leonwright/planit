@@ -63,7 +63,6 @@ export const getUserData = async (
   accessToken: string
 ): Promise<UserData> => {
   const url = `https://plan-it.us.auth0.com/api/v2/users/${uid}`;
-  console.log(url);
   const options = {
     method: 'GET',
     url: url,

@@ -1,19 +1,10 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import {
-  ApplicationSettingsModule,
-  configuration,
-} from '@planit/server/shared';
+import { ServerFeatureAuthorizationModule } from '@planit/server/feature-authorization';
 import { ServerFeatureOnboardingController } from './server-feature-onboarding.controller';
 import { ServerFeatureOnboardingService } from './server-feature-onboarding.service';
 
 @Module({
-  imports: [
-    ApplicationSettingsModule,
-    ConfigModule.forRoot({
-      load: [configuration],
-    }),
-  ],
+  imports: [ServerFeatureAuthorizationModule],
   controllers: [ServerFeatureOnboardingController],
   providers: [ServerFeatureOnboardingService],
   exports: [ServerFeatureOnboardingService],

@@ -1,22 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { SettingsServiceService } from '@planit/server/shared';
-import { ConfigService } from '@nestjs/config';
 import { OnboardingSteps } from './steps.enum';
-import { getUserData } from '@planit/server/feature-auth0-management-api';
+import { UserService } from '@planit/server/feature-authorization';
 
 @Injectable()
 export class ServerFeatureOnboardingService {
-  constructor(
-    private readonly settingsService: SettingsServiceService,
-    private configService: ConfigService
-  ) {}
+  constructor(private readonly userService: UserService) {}
 
   async getOnboardingStatus(uid: string): Promise<OnboardingSteps> {
-    const uuid = this.configService.get<string>('applicationId');
-    const settings = await this.settingsService.getAppSettings(uuid);
-    const userData = await getUserData(uid, settings.auth0ManagementApiToken);
-
-    console.log(userData);
+    const userData = await this.userService.getUserInformation(uid);
 
     if (userData.user_metadata.fresh_account) {
       return OnboardingSteps.NeedsSetup;
