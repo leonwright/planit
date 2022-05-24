@@ -18,7 +18,7 @@ export class ServerFeatureOnboardingController {
     description: 'The status number of the users onboarding status',
   })
   @UseGuards(AuthorizationGuard)
-  getOnboardingStatus(@Req() request: any): Promise<OnboardingSteps> {
+  getOnboardingStatus(@Req() request): Promise<OnboardingSteps> {
     console.log(request.auth.sub);
     return this.serverFeatureOnboardingService.getOnboardingStatus(
       request.auth.sub

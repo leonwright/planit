@@ -38,7 +38,7 @@ export interface Identity {
 }
 
 export interface UserMetadata {
-  [string: string]: any;
+  [string: string]: unknown;
 }
 
 export async function getManagementApiToken(
