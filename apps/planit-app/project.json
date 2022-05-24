@@ -5,7 +5,9 @@
   "targets": {
     "build": {
       "executor": "@nrwl/next:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "root": "apps/planit-app",
@@ -43,7 +45,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/planit-app"],
+      "outputs": [
+        "coverage/apps/planit-app"
+      ],
       "options": {
         "jestConfig": "apps/planit-app/jest.config.ts",
         "passWithNoTests": true
@@ -51,11 +55,17 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/planit-app/**/*.{ts,tsx,js,jsx}"]
+        "lintFilePatterns": [
+          "apps/planit-app/**/*.{ts,tsx,js,jsx}"
+        ]
       }
     }
   },
-  "tags": []
+  "tags": [
+    "scope:client"
+  ]
 }

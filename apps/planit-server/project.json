@@ -5,12 +5,16 @@
   "targets": {
     "build": {
       "executor": "@nrwl/node:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/planit-server",
         "main": "apps/planit-server/src/main.ts",
         "tsConfig": "apps/planit-server/tsconfig.app.json",
-        "assets": ["apps/planit-server/src/assets"]
+        "assets": [
+          "apps/planit-server/src/assets"
+        ]
       },
       "configurations": {
         "production": {
@@ -34,19 +38,28 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/planit-server/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/planit-server/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/planit-server"],
+      "outputs": [
+        "coverage/apps/planit-server"
+      ],
       "options": {
         "jestConfig": "apps/planit-server/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["scope:planit", "type:app"]
+  "tags": [
+    "scope:server",
+    "type:app"
+  ]
 }

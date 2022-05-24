@@ -5,30 +5,43 @@
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/server/feature-authorization",
         "tsConfig": "libs/server/feature-authorization/tsconfig.lib.json",
         "packageJson": "libs/server/feature-authorization/package.json",
         "main": "libs/server/feature-authorization/src/index.ts",
-        "assets": ["libs/server/feature-authorization/*.md"]
+        "assets": [
+          "libs/server/feature-authorization/*.md"
+        ]
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/server/feature-authorization/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/server/feature-authorization/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/server/feature-authorization"],
+      "outputs": [
+        "coverage/libs/server/feature-authorization"
+      ],
       "options": {
         "jestConfig": "libs/server/feature-authorization/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": []
+  "tags": [
+    "scope:server",
+    "type:lib"
+  ]
 }

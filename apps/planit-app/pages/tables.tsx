@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Head from 'next/head';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,7 +9,6 @@ import Paper from '@mui/material/Paper';
 import { Sidebar } from '@planit/shared';
 import { Typography } from '@mui/material';
 import styled from 'styled-components';
-import { useState } from 'react';
 import { CreateTable } from '@planit/feature-tables';
 
 function createData(
@@ -42,16 +40,6 @@ const Header = styled.div`
 `;
 
 export default function TablesPage() {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   return (
     <Sidebar>
       <Head>

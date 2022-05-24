@@ -1,8 +1,14 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module, OnApplicationBootstrap } from '@nestjs/common';
 import { ServerFeatureAuthorizationModule } from '@planit/server/feature-authorization';
 import { ServerFeatureRestaurantsModule } from '@planit/server/feature-restaurants';
-import { DataAccessModule, databaseProviders } from '@planit/server/shared';
-import { auth } from 'express-oauth2-jwt-bearer';
+import {
+  ApplicationSettingsModule,
+  configuration,
+  DataAccessModule,
+  SettingsServiceService,
+} from '@planit/server/shared';
+import { ScheduleModule } from '@nestjs/schedule';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,19 +18,19 @@ import { AppService } from './app.service';
     ServerFeatureAuthorizationModule,
     ServerFeatureRestaurantsModule,
     DataAccessModule,
+    ApplicationSettingsModule,
+    ScheduleModule.forRoot(),
+    ConfigModule.forRoot({
+      load: [configuration],
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(
-        auth({
-          issuerBaseURL: 'https://plan-it.us.auth0.com/',
-          audience: 'https://api.planit.applictasy.com',
-        })
-      )
-      .forRoutes('/api');
+export class AppModule implements OnApplicationBootstrap {
+  constructor(private readonly settingsSetvice: SettingsServiceService) {}
+
+  onApplicationBootstrap() {
+    this.settingsSetvice.init('leons-mackbook');
   }
 }

@@ -16,6 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@planit/feature-tables": ["libs/feature-tables/src/index.ts"],
+      "@planit/server/feature-auth0-management-api": [
+        "libs/server/feature-auth0-management-api/src/index.ts"
+      ],
       "@planit/server/feature-authorization": [
         "libs/server/feature-authorization/src/index.ts"
       ],

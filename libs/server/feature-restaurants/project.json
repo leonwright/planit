@@ -5,30 +5,43 @@
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/libs/server/feature-restaurants",
         "tsConfig": "libs/server/feature-restaurants/tsconfig.lib.json",
         "packageJson": "libs/server/feature-restaurants/package.json",
         "main": "libs/server/feature-restaurants/src/index.ts",
-        "assets": ["libs/server/feature-restaurants/*.md"]
+        "assets": [
+          "libs/server/feature-restaurants/*.md"
+        ]
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["libs/server/feature-restaurants/**/*.ts"]
+        "lintFilePatterns": [
+          "libs/server/feature-restaurants/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/server/feature-restaurants"],
+      "outputs": [
+        "coverage/libs/server/feature-restaurants"
+      ],
       "options": {
         "jestConfig": "libs/server/feature-restaurants/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["type:server-application", "scope:tables"]
+  "tags": [
+    "scope:server",
+    "type:lib"
+  ]
 }

@@ -1,10 +1,19 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "ignorePatterns": [
+    "**/*"
+  ],
+  "plugins": [
+    "@nrwl/nx"
+  ],
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": [
+        "*.ts",
+        "*.tsx",
+        "*.js",
+        "*.jsx"
+      ],
       "rules": {
         "@nrwl/nx/enforce-module-boundaries": [
           "error",
@@ -13,22 +22,59 @@
             "allow": [],
             "depConstraints": [
               {
+                "sourceTag": "scope:server",
+                "onlyDependOnLibsWithTags": [
+                  "scope:server",
+                  "type:lib"
+                ]
+              },
+              {
+                "sourceTag": "scope:client",
+                "onlyDependOnLibsWithTags": [
+                  "scope:client"
+                ]
+              },
+              {
+                "sourceTag": "type:lib",
+                "notDependOnLibsWithTags": [
+                  "type:app"
+                ]
+              },
+              {
+                "sourceTag": "scope:client",
+                "notDependOnLibsWithTags": [
+                  "scope:server"
+                ]
+              },
+              {
                 "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
+                "onlyDependOnLibsWithTags": [
+                  "*"
+                ]
+              },
             ]
           }
         ]
       }
     },
     {
-      "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nrwl/nx/typescript"],
+      "files": [
+        "*.ts",
+        "*.tsx"
+      ],
+      "extends": [
+        "plugin:@nrwl/nx/typescript"
+      ],
       "rules": {}
     },
     {
-      "files": ["*.js", "*.jsx"],
-      "extends": ["plugin:@nrwl/nx/javascript"],
+      "files": [
+        "*.js",
+        "*.jsx"
+      ],
+      "extends": [
+        "plugin:@nrwl/nx/javascript"
+      ],
       "rules": {}
     }
   ]
