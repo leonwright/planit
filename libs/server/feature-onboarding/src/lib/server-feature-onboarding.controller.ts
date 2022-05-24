@@ -1,17 +1,6 @@
-import {
-  Controller,
-  Get,
-  Put,
-  Req,
-  SetMetadata,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { Request } from 'express';
-import {
-  AuthorizationGuard,
-  PermissionsGuard,
-} from '@planit/server/feature-authorization';
+import { AuthorizationGuard } from '@planit/server/feature-authorization';
 import { ServerFeatureOnboardingService } from './server-feature-onboarding.service';
 import { OnboardingSteps } from './steps.enum';
 
