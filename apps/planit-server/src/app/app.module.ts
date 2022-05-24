@@ -1,5 +1,4 @@
 import { Module, OnApplicationBootstrap } from '@nestjs/common';
-import { ServerFeatureAuthorizationModule } from '@planit/server/feature-authorization';
 import { ServerFeatureRestaurantsModule } from '@planit/server/feature-restaurants';
 import {
   ApplicationSettingsModule,
@@ -16,7 +15,6 @@ import { ServerFeatureOnboardingModule } from '@planit/server/feature-onboarding
 
 @Module({
   imports: [
-    ServerFeatureAuthorizationModule,
     ServerFeatureRestaurantsModule,
     ServerFeatureOnboardingModule,
     DataAccessModule,
