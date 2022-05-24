@@ -22,6 +22,9 @@
       "@planit/server/feature-authorization": [
         "libs/server/feature-authorization/src/index.ts"
       ],
+      "@planit/server/feature-onboarding": [
+        "libs/server/feature-onboarding/src/index.ts"
+      ],
       "@planit/server/feature-restaurants": [
         "libs/server/feature-restaurants/src/index.ts"
       ],

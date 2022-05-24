@@ -18,7 +18,7 @@ export class AppService {
     return { message: 'Welcome to planit-server!' };
   }
 
-  @Cron('*/1  * * * * ', {
+  @Cron('*/59  * * * * ', {
     name: 'get-management-api-token',
   })
   async getManagementApiToken() {
@@ -28,8 +28,6 @@ export class AppService {
         client_id: this.configService.get<string>('auth0ClientId'),
         client_secret: this.configService.get<string>('auth0ClientSecret'),
       };
-
-      console.log(credentials);
       const response = await getManagementApiToken(credentials);
       this.settingsService.addAccessToken(
         'leons-mackbook',

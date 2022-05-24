@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/server/feature-onboarding/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/server/feature-onboarding",
+        "tsConfig": "libs/server/feature-onboarding/tsconfig.lib.json",
+        "packageJson": "libs/server/feature-onboarding/package.json",
+        "main": "libs/server/feature-onboarding/src/index.ts",
+        "assets": ["libs/server/feature-onboarding/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/server/feature-onboarding/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/server/feature-onboarding"],
+      "options": {
+        "jestConfig": "libs/server/feature-onboarding/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["type:lib", "scope:server"]
+}

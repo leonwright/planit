@@ -20,4 +20,8 @@ export class SettingsServiceService {
       .updateOne({ uuid }, { auth0ManagementApiToken: accessToken, uuid })
       .exec();
   }
+
+  async getAppSettings(uuid: string): Promise<Settings> {
+    return this.settingsModel.findOne({ uuid: uuid }).exec();
+  }
 }

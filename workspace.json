@@ -8,6 +8,7 @@
     "planit-server": "apps/planit-server",
     "server-feature-auth0-management-api": "libs/server/feature-auth0-management-api",
     "server-feature-authorization": "libs/server/feature-authorization",
+    "server-feature-onboarding": "libs/server/feature-onboarding",
     "server-feature-restaurants": "libs/server/feature-restaurants",
     "server-shared": "libs/server/shared",
     "shared": "libs/shared"

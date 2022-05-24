@@ -12,11 +12,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { ServerFeatureOnboardingModule } from '@planit/server/feature-onboarding';
 
 @Module({
   imports: [
     ServerFeatureAuthorizationModule,
     ServerFeatureRestaurantsModule,
+    ServerFeatureOnboardingModule,
     DataAccessModule,
     ApplicationSettingsModule,
     ScheduleModule.forRoot(),
