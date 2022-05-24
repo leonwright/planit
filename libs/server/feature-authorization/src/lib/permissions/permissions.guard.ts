@@ -15,18 +15,16 @@ export class PermissionsGuard implements CanActivate {
     this.logger.debug('Checking permissions...');
     const [req] = context.getArgs();
     const userPermissions = req?.auth?.permissions || [];
-    this.logger.debug('User Permissions:');
-    this.logger.debug(userPermissions);
+    this.logger.debug(`User Permissions: ${userPermissions}`);
     const requiredPermissions =
       this.reflector.get('permissions', context.getHandler()) || [];
-    this.logger.debug('Required Permissions:');
-    this.logger.debug(userPermissions);
+    this.logger.debug(`Required Permissions: ${requiredPermissions}`);
 
     const hasAllRequiredPermissions = requiredPermissions.every((permission) =>
       userPermissions.includes(permission)
     );
 
-    this.logger.debug(
+    this.logger.log(
       `has all required permissions: ${hasAllRequiredPermissions}`
     );
 
