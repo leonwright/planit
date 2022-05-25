@@ -10,7 +10,9 @@ import { Reflector } from '@nestjs/core';
 @Injectable()
 export class PermissionsGuard implements CanActivate {
   private readonly logger = new Logger(PermissionsGuard.name);
+
   constructor(private reflector: Reflector) {}
+
   async canActivate(context: ExecutionContext): Promise<boolean> {
     this.logger.debug('Checking permissions...');
     const [req] = context.getArgs();

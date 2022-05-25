@@ -2,6 +2,7 @@ import {
   CanActivate,
   ExecutionContext,
   Injectable,
+  Logger,
   UnauthorizedException,
 } from '@nestjs/common';
 import { expressJwtSecret } from 'jwks-rsa';
@@ -10,9 +11,13 @@ import { promisify } from 'util';
 
 @Injectable()
 export class AuthorizationGuard implements CanActivate {
+  private readonly logger = new Logger(AuthorizationGuard.name);
+
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.getArgByIndex(0);
     const res = context.getArgByIndex(1);
+
+    this.logger.debug('Checking authentication...');
 
     const checkJwt = promisify(
       jwt({
@@ -29,8 +34,10 @@ export class AuthorizationGuard implements CanActivate {
     );
     try {
       await checkJwt(req, res);
+      this.logger.log('User authenticated.');
       return true;
     } catch (error) {
+      this.logger.error('There was an error authenticating the user.', error);
       throw new UnauthorizedException(error);
     }
   }

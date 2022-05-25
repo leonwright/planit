@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { Model } from 'mongoose';
 import {
   CreateRestaurantDTO,
@@ -9,40 +9,54 @@ import { Restaurant } from './entities/restaurant.entity';
 
 @Injectable()
 export class ServerFeatureRestaurantsService {
+  private readonly logger = new Logger(ServerFeatureRestaurantsService.name);
+
   constructor(
     @Inject('RESTAURANT_MODEL')
     private restaurantModel: Model<Restaurant>
   ) {}
-  hello(): Partial<Restaurant> {
-    return {
-      name: 'Mamasitas',
-      address: 'Cra 43D ## 10 - 77, Medellín, El Poblado, Medellín, Antioquia',
-      description: 'Argentinian Restaurant in Manila',
-    };
-  }
 
   async findAll(): Promise<Restaurant[]> {
-    return this.restaurantModel.find().exec();
+    this.logger.log('running findAll()');
+    const restaurants = this.restaurantModel.find().exec();
+    this.logger.debug(await restaurants);
+    this.logger.log('successfully grabbed restaurants');
+    return restaurants;
   }
 
   async create(createRestaurantDto: CreateRestaurantDTO): Promise<Restaurant> {
+    this.logger.log(`running create(${createRestaurantDto})`);
     const createdRestaurant = new this.restaurantModel(createRestaurantDto);
-    return createdRestaurant.save();
+
+    const saveResults = createdRestaurant.save();
+    this.logger.log('successfully created restaurant');
+    this.logger.debug(await saveResults);
+    return saveResults;
   }
 
   async deleteRestaurantById(getRestaurantDto: GetRestaurantDTO) {
-    return this.restaurantModel.deleteOne({
+    this.logger.log(`running deleteRestaurantById(${getRestaurantDto})`);
+    const deleteResults = this.restaurantModel.deleteOne({
       _id: getRestaurantDto.restaurantId,
     });
+    this.logger.log('sucessfully deleted restaurant.');
+    return deleteResults;
   }
 
   async updateRestaurantById(
     restaurantId: string,
     updateRestaurantDto: UpdateRestaurantDTO
   ) {
-    return this.restaurantModel.updateOne(
-      { _id: restaurantId },
-      updateRestaurantDto
+    this.logger.log(
+      `running updateRestaurantById(${restaurantId}, ${updateRestaurantDto})`
     );
+
+    const updateResult = this.restaurantModel
+      .updateOne({ _id: restaurantId }, updateRestaurantDto)
+      .exec();
+
+    this.logger.log('sucessfully updated restaurant');
+    this.logger.debug(await updateResult);
+    return updateResult;
   }
 }
