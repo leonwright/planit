@@ -1,5 +1,5 @@
 import { Connection } from 'mongoose';
-import { TableSchema } from './../schemas/table.schema';
+import { TableSchema } from './../entities/table.entity';
 
 export const tableProviders = [
   {

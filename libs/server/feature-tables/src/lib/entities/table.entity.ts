@@ -1,26 +1,27 @@
+import { ObjectType, Field } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
-import { Document } from 'mongoose';
+import { Document, Schema as MongooseSchema } from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
+@Schema()
+@ObjectType({ description: 'restaurnant ' })
 export class Table extends Document {
-  /**
-   * The name of the Cat
-   * @example Kitty
-   */
+  @Field(() => String)
+  _id?: MongooseSchema.Types.ObjectId;
+
   @ApiProperty({
-    example: 'Mamasitas',
-    description: 'The name of the restaurant.',
+    example: 'Table #1',
+    description: 'An arbitrary name for the table',
   })
+  @Prop()
+  @Field(() => String, { description: 'The name of the table.' })
   name: string;
 
-  @ApiProperty({
-    example: 'Cra 43D ## 10 - 77, Medellín, El Poblado, Medellín, Antioquia',
-    description: 'The address of the restaurant.',
+  @Prop()
+  @Field(() => String, {
+    description: 'the ObjectId of the restaurant that owns the table',
   })
-  address: string;
-
-  @ApiProperty({
-    example: 'Argentinian Restaurant in Manila',
-    description: 'The description of the restaurant.',
-  })
-  description: string;
+  restaurantId: MongooseSchema.Types.ObjectId;
 }
+
+export const TableSchema = SchemaFactory.createForClass(Table);

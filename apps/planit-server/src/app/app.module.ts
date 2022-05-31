@@ -14,11 +14,13 @@ import { AppService } from './app.service';
 import { ServerFeatureOnboardingModule } from '@planit/server/feature-onboarding';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ServerFeatureTablesModule } from '@planit/server/feature-tables';
 
 @Module({
   imports: [
     ServerFeatureRestaurantsModule,
     ServerFeatureOnboardingModule,
+    ServerFeatureTablesModule,
     DataAccessModule,
     ApplicationSettingsModule,
     ScheduleModule.forRoot(),

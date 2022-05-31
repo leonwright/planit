@@ -1,11 +1,21 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, Parent, ResolveField } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { forwardRef, Inject } from '@nestjs/common';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import {
+  ServerFeatureTablesService,
+  Table,
+} from '@planit/server/feature-tables';
 
 @Schema()
 @ObjectType({ description: 'restaurnant ' })
 export class Restaurant extends Document {
+  constructor() {
+    super();
+  }
+
   @Field(() => String)
   _id?: MongooseSchema.Types.ObjectId;
 

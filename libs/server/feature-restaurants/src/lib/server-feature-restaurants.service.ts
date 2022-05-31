@@ -21,6 +21,13 @@ export class ServerFeatureRestaurantsService {
     return restaurants;
   }
 
+  async exists(_id: string) {
+    this.logger.log(`checking if restaruant: ${_id} exists.`);
+    const restaurantExists = this.restaurantModel.exists({ _id }).exec();
+    this.logger.debug((await restaurantExists) !== null);
+    return (await restaurantExists) !== null;
+  }
+
   async findById(_id: string): Promise<Restaurant> {
     this.logger.log('running findAll()');
     const restaurant = this.restaurantModel.findById(_id).exec();

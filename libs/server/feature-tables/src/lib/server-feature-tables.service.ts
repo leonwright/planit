@@ -1,6 +1,14 @@
-import { Inject, Injectable, Logger } from '@nestjs/common';
+import {
+  forwardRef,
+  Inject,
+  Injectable,
+  Logger,
+  NotFoundException,
+} from '@nestjs/common';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import { ServerFeatureRestaurantsService } from '@planit/server/feature-restaurants';
 import { Model } from 'mongoose';
-import { CreateTableDTO, GetRestaurantDTO, UpdateRestaurantDTO } from './dtos';
+import { CreateTableDTO } from './dtos';
 import { Table } from './entities/table.entity';
 
 @Injectable()
@@ -9,7 +17,9 @@ export class ServerFeatureTablesService {
 
   constructor(
     @Inject('TABLE_MODEL')
-    private tableModel: Model<Table>
+    private tableModel: Model<Table>,
+    @Inject(forwardRef(() => ServerFeatureRestaurantsService))
+    private restaurantService: ServerFeatureRestaurantsService
   ) {}
 
   async findAll(): Promise<Table[]> {
@@ -20,9 +30,21 @@ export class ServerFeatureTablesService {
     return tables;
   }
 
+  async findById(_id: string): Promise<Table[]> {
+    this.logger.log('running findAll()');
+    const tables = this.tableModel.find({ restaurantId: _id }).exec();
+    this.logger.debug(await tables);
+    this.logger.log('successfully grabbed tables');
+    return tables;
+  }
+
   async create(createTableDto: CreateTableDTO): Promise<Table> {
-    this.logger.log(`running create(${createTableDto})`);
+    this.logger.log(`running create(${createTableDto.restaurantId})`);
     const createdTable = new this.tableModel(createTableDto);
+
+    if (!(await this.restaurantService.exists(createTableDto.restaurantId))) {
+      throw new NotFoundException('restaurant does not exist');
+    }
 
     const saveResults = createdTable.save();
     this.logger.log('successfully created table');
@@ -30,29 +52,29 @@ export class ServerFeatureTablesService {
     return saveResults;
   }
 
-  async deleteRestaurantById(getRestaurantDto: GetRestaurantDTO) {
-    this.logger.log(`running deleteRestaurantById(${getRestaurantDto})`);
-    const deleteResults = this.tableModel.deleteOne({
-      _id: getRestaurantDto.restaurantId,
-    });
-    this.logger.log('sucessfully deleted restaurant.');
-    return deleteResults;
-  }
+  // async deleteRestaurantById(getRestaurantDto: GetRestaurantDTO) {
+  //   this.logger.log(`running deleteRestaurantById(${getRestaurantDto})`);
+  //   const deleteResults = this.tableModel.deleteOne({
+  //     _id: getRestaurantDto.restaurantId,
+  //   });
+  //   this.logger.log('sucessfully deleted restaurant.');
+  //   return deleteResults;
+  // }
 
-  async updateRestaurantById(
-    restaurantId: string,
-    updateRestaurantDto: UpdateRestaurantDTO
-  ) {
-    this.logger.log(
-      `running updateRestaurantById(${restaurantId}, ${updateRestaurantDto})`
-    );
+  // async updateRestaurantById(
+  //   restaurantId: string,
+  //   updateRestaurantDto: UpdateRestaurantDTO
+  // ) {
+  //   this.logger.log(
+  //     `running updateRestaurantById(${restaurantId}, ${updateRestaurantDto})`
+  //   );
 
-    const updateResult = this.tableModel
-      .updateOne({ _id: restaurantId }, updateRestaurantDto)
-      .exec();
+  //   const updateResult = this.tableModel
+  //     .updateOne({ _id: restaurantId }, updateRestaurantDto)
+  //     .exec();
 
-    this.logger.log('sucessfully updated restaurant');
-    this.logger.debug(await updateResult);
-    return updateResult;
-  }
+  //   this.logger.log('sucessfully updated restaurant');
+  //   this.logger.debug(await updateResult);
+  //   return updateResult;
+  // }
 }

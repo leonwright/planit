@@ -1,0 +1,5 @@
+{
+  "label": "Run All Apps",
+  "type": "shell",
+  "command": "npx nx run-many --all --parallel --maxParallel=10 --target=serve"
+}
