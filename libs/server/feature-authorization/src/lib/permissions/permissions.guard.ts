@@ -6,6 +6,7 @@ import {
   Logger,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
+import { GqlExecutionContext } from '@nestjs/graphql';
 
 @Injectable()
 export class PermissionsGuard implements CanActivate {
@@ -15,8 +16,10 @@ export class PermissionsGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     this.logger.debug('Checking permissions...');
+    const ctx = GqlExecutionContext.create(context).getContext();
     const [req] = context.getArgs();
-    const userPermissions = req?.auth?.permissions || [];
+    const userPermissions =
+      req?.auth?.permissions || ctx.auth.permissions || [];
     this.logger.debug(`User Permissions: ${userPermissions}`);
     const requiredPermissions =
       this.reflector.get('permissions', context.getHandler()) || [];

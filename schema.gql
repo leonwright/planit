@@ -19,10 +19,10 @@ type Restaurant {
 """restaurnant """
 type MongooseDeleteResult {
   """acknowledgement that docs were deleted"""
-  acknowledged: String!
+  acknowledged: Boolean!
 
   """number of docs deleted"""
-  deletedCount: String!
+  deletedCount: Int!
 }
 
 type Query {
