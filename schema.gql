@@ -25,9 +25,16 @@ type MongooseDeleteResult {
   deletedCount: Int!
 }
 
+"""onboarding_steps """
+type OnboardingStatus {
+  """status of user"""
+  status: String!
+}
+
 type Query {
   restaurants: [Restaurant!]!
   restaurant(_id: String!): Restaurant!
+  onboardingStatus: OnboardingStatus!
 }
 
 type Mutation {
