@@ -12,6 +12,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ServerFeatureOnboardingModule } from '@planit/server/feature-onboarding';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 
 @Module({
   imports: [
@@ -22,6 +24,12 @@ import { ServerFeatureOnboardingModule } from '@planit/server/feature-onboarding
     ScheduleModule.forRoot(),
     ConfigModule.forRoot({
       load: [configuration],
+    }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: './schema.gql',
+      debug: true,
+      playground: true,
     }),
   ],
   controllers: [AppController],

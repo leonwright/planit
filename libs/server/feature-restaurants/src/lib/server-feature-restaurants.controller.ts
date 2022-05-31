@@ -62,7 +62,9 @@ export class ServerFeatureRestaurantsController {
   @UseGuards(AuthorizationGuard, PermissionsGuard)
   @SetMetadata('permissions', ['delete:restaurant'])
   deleteRestaurant(@Param() params: GetRestaurantDTO) {
-    return this.serverFeatureRestaurantsService.deleteRestaurantById(params);
+    return this.serverFeatureRestaurantsService.deleteRestaurantById(
+      params.restaurantId
+    );
   }
 
   @Put()
@@ -74,7 +76,7 @@ export class ServerFeatureRestaurantsController {
   @SetMetadata('permissions', ['update:restaurant'])
   updateRestaurant(@Body() body: UpdateRestaurantDTO) {
     return this.serverFeatureRestaurantsService.updateRestaurantById(
-      body.restaurantId,
+      body._id,
       body
     );
   }

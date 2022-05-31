@@ -1,5 +1,5 @@
 import { Connection } from 'mongoose';
-import { RestaurantSchema } from './../schemas/restaurant.schema';
+import { RestaurantSchema } from './../entities/restaurant.entity';
 
 export const restaurantProviders = [
   {

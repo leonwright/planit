@@ -1,0 +1,60 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""restaurnant """
+type Restaurant {
+  _id: String!
+
+  """The name of the restaurant."""
+  name: String!
+
+  """The address of the restaurant."""
+  address: String!
+
+  """The description of the restaurant."""
+  description: String!
+}
+
+"""restaurnant """
+type MongooseDeleteResult {
+  """acknowledgement that docs were deleted"""
+  acknowledged: String!
+
+  """number of docs deleted"""
+  deletedCount: String!
+}
+
+type Query {
+  restaurants: [Restaurant!]!
+  restaurant(_id: String!): Restaurant!
+}
+
+type Mutation {
+  createRestaurant(createRestaurantDto: CreateRestaurantDTO!): Restaurant!
+  updateRestaurant(updateUserInput: UpdateRestaurantDTO!): Restaurant!
+  deleteRestaurant(_id: String!): MongooseDeleteResult!
+}
+
+input CreateRestaurantDTO {
+  """name of the restaurnant"""
+  name: String!
+
+  """description of the restaurnant"""
+  description: String!
+
+  """address of the restaurnant"""
+  address: String!
+}
+
+input UpdateRestaurantDTO {
+  """name of the restaurnant"""
+  name: String
+
+  """description of the restaurnant"""
+  description: String
+
+  """address of the restaurnant"""
+  address: String
+  _id: String!
+}

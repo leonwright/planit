@@ -1,25 +1,14 @@
+import { Field, InputType, PartialType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional } from 'class-validator';
 import { IsObjectId } from 'class-validator-mongo-object-id';
+import { CreateRestaurantDTO } from './create-restaurant.dto';
 
-export class UpdateRestaurantDTO {
+@InputType()
+export class UpdateRestaurantDTO extends PartialType(CreateRestaurantDTO) {
   @IsNotEmpty({ message: 'You must provide a valid restaurantId' })
   @IsObjectId({ message: 'restaurantId must be a valid ObjectId' })
   @ApiProperty()
-  restaurantId: string;
-
-  @IsOptional()
-  @ApiProperty()
-  @IsNotEmpty({ message: 'Please name or provide a value.' })
-  name: string;
-
-  @IsOptional()
-  @ApiProperty()
-  @IsNotEmpty({ message: 'Please description or provide a value.' })
-  description: string;
-
-  @IsOptional()
-  @ApiProperty()
-  @IsNotEmpty({ message: 'Please address or provide a value.' })
-  address: string;
+  @Field(() => String)
+  _id: string;
 }

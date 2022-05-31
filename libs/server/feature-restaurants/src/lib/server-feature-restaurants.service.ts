@@ -1,11 +1,8 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
 import { Model } from 'mongoose';
-import {
-  CreateRestaurantDTO,
-  GetRestaurantDTO,
-  UpdateRestaurantDTO,
-} from './dtos';
+import { CreateRestaurantDTO, UpdateRestaurantDTO } from './dtos';
 import { Restaurant } from './entities/restaurant.entity';
+import { DeleteResult, UpdateResult } from 'mongodb';
 
 @Injectable()
 export class ServerFeatureRestaurantsService {
@@ -24,8 +21,16 @@ export class ServerFeatureRestaurantsService {
     return restaurants;
   }
 
+  async findById(_id: string): Promise<Restaurant> {
+    this.logger.log('running findAll()');
+    const restaurant = this.restaurantModel.findById(_id).exec();
+    this.logger.debug(await restaurant);
+    this.logger.log('successfully grabbed restaurants');
+    return restaurant;
+  }
+
   async create(createRestaurantDto: CreateRestaurantDTO): Promise<Restaurant> {
-    this.logger.log(`running create(${createRestaurantDto})`);
+    this.logger.log(`running create()`);
     const createdRestaurant = new this.restaurantModel(createRestaurantDto);
 
     const saveResults = createdRestaurant.save();
@@ -34,11 +39,13 @@ export class ServerFeatureRestaurantsService {
     return saveResults;
   }
 
-  async deleteRestaurantById(getRestaurantDto: GetRestaurantDTO) {
-    this.logger.log(`running deleteRestaurantById(${getRestaurantDto})`);
-    const deleteResults = this.restaurantModel.deleteOne({
-      _id: getRestaurantDto.restaurantId,
-    });
+  async deleteRestaurantById(_id: string): Promise<DeleteResult> {
+    this.logger.log(`running deleteRestaurantById(${_id})`);
+    const deleteResults = this.restaurantModel
+      .deleteOne({
+        _id: _id,
+      })
+      .exec();
     this.logger.log('sucessfully deleted restaurant.');
     return deleteResults;
   }
@@ -46,10 +53,8 @@ export class ServerFeatureRestaurantsService {
   async updateRestaurantById(
     restaurantId: string,
     updateRestaurantDto: UpdateRestaurantDTO
-  ) {
-    this.logger.log(
-      `running updateRestaurantById(${restaurantId}, ${updateRestaurantDto})`
-    );
+  ): Promise<UpdateResult> {
+    this.logger.log(`running updateRestaurantById(${restaurantId})`);
 
     const updateResult = this.restaurantModel
       .updateOne({ _id: restaurantId }, updateRestaurantDto)
