@@ -1,14 +1,4 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Args,
-  ObjectType,
-  Field,
-  Int,
-  Context,
-} from '@nestjs/graphql';
-import { DeleteResult, ObjectId, UpdateResult } from 'mongodb';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { SetMetadata, UseGuards } from '@nestjs/common';
 import {
   GqlAuthGuard,

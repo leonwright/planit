@@ -1,7 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { Document, Schema as MongooseSchema } from 'mongoose';
-import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType({ description: 'onboarding_steps ' })
 export class OnboardingStatus {

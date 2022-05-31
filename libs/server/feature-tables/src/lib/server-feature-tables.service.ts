@@ -51,30 +51,4 @@ export class ServerFeatureTablesService {
     this.logger.debug(await saveResults);
     return saveResults;
   }
-
-  // async deleteRestaurantById(getRestaurantDto: GetRestaurantDTO) {
-  //   this.logger.log(`running deleteRestaurantById(${getRestaurantDto})`);
-  //   const deleteResults = this.tableModel.deleteOne({
-  //     _id: getRestaurantDto.restaurantId,
-  //   });
-  //   this.logger.log('sucessfully deleted restaurant.');
-  //   return deleteResults;
-  // }
-
-  // async updateRestaurantById(
-  //   restaurantId: string,
-  //   updateRestaurantDto: UpdateRestaurantDTO
-  // ) {
-  //   this.logger.log(
-  //     `running updateRestaurantById(${restaurantId}, ${updateRestaurantDto})`
-  //   );
-
-  //   const updateResult = this.tableModel
-  //     .updateOne({ _id: restaurantId }, updateRestaurantDto)
-  //     .exec();
-
-  //   this.logger.log('sucessfully updated restaurant');
-  //   this.logger.debug(await updateResult);
-  //   return updateResult;
-  // }
 }

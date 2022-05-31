@@ -35,6 +35,7 @@ class MongooseDeleteResult implements DeleteResult {
   deletedCount: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class MongooseUpdateResult implements UpdateResult {
   @Field(() => Boolean, {
     description: 'acknowledgement that docs were deleted',
@@ -74,7 +75,8 @@ export class RestaurantResolver {
   @UseGuards(GqlAuthGuard, PermissionsGuard)
   @SetMetadata('permissions', ['read:restaurants'])
   findRestaurantById(
-    @Context() ctx: any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    @Context() _ctx: any,
     @Args('_id', { type: () => String }) id: string
   ) {
     return this.restaurantService.findById(id);
