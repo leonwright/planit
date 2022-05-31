@@ -94,7 +94,9 @@ export class RestaurantResolver {
     return this.restaurantService.deleteRestaurantById(id);
   }
 
-  @ResolveField('tables', () => [Table])
+  @ResolveField('tables', () => [Table], {
+    description: 'all tables belonging to this restaurant',
+  })
   async tables(@Parent() restaurant: Restaurant) {
     const { _id } = restaurant;
     return this.tableService.findById(_id.toString());
