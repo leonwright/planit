@@ -1,0 +1,34 @@
+{
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/server/feature-tables/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/server/feature-tables",
+        "tsConfig": "libs/server/feature-tables/tsconfig.lib.json",
+        "packageJson": "libs/server/feature-tables/package.json",
+        "main": "libs/server/feature-tables/src/index.ts",
+        "assets": ["libs/server/feature-tables/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/server/feature-tables/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/server/feature-tables"],
+      "options": {
+        "jestConfig": "libs/server/feature-tables/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:server", "type:lib"]
+}

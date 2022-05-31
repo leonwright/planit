@@ -28,6 +28,9 @@
       "@planit/server/feature-restaurants": [
         "libs/server/feature-restaurants/src/index.ts"
       ],
+      "@planit/server/feature-tables": [
+        "libs/server/feature-tables/src/index.ts"
+      ],
       "@planit/server/shared": ["libs/server/shared/src/index.ts"],
       "@planit/shared": ["libs/shared/src/index.ts"]
     }

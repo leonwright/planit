@@ -10,6 +10,7 @@
     "server-feature-authorization": "libs/server/feature-authorization",
     "server-feature-onboarding": "libs/server/feature-onboarding",
     "server-feature-restaurants": "libs/server/feature-restaurants",
+    "server-feature-tables": "libs/server/feature-tables",
     "server-shared": "libs/server/shared",
     "shared": "libs/shared"
   }
